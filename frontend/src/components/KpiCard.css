@@ -1,0 +1,30 @@
+.kpi-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  background-color: rgba(32, 129, 255, 0.08);
+  border: 1px solid rgba(32, 129, 255, 0.3);
+}
+
+.kpi-card[data-accent='positive'] {
+  background-color: rgba(22, 163, 74, 0.08);
+  border-color: rgba(22, 163, 74, 0.3);
+}
+
+.kpi-card[data-accent='negative'] {
+  background-color: rgba(220, 38, 38, 0.08);
+  border-color: rgba(220, 38, 38, 0.3);
+}
+
+.kpi-title {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.kpi-value {
+  font-size: 1.75rem;
+}

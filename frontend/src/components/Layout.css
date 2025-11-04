@@ -1,0 +1,10 @@
+.layout {
+  min-height: 100vh;
+  background: linear-gradient(180deg, rgba(0, 91, 187, 0.05), transparent);
+}
+
+.layout-content {
+  width: min(960px, 90%);
+  margin: 0 auto;
+  padding: var(--spacing-xl) 0 var(--spacing-lg);
+}

@@ -1,0 +1,10 @@
+{
+  "name": "PWA Belvo",
+  "short_name": "Belvo",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#005BBB",
+  "description": "Belvo sandbox bank insights PWA.",
+  "icons": []
+}

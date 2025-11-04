@@ -1,0 +1,42 @@
+.bank-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.bank-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-lg);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.bank-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
+}
+
+.bank-name {
+  font-weight: 700;
+}
+
+.bank-country {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+.bank-type {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  letter-spacing: 0.06em;
+}
+
+.bank-empty {
+  color: var(--color-muted);
+  font-style: italic;
+}

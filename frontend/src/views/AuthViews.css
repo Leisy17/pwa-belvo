@@ -1,0 +1,16 @@
+.auth-view {
+  display: flex;
+  min-height: calc(100vh - 120px);
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-error {
+  color: var(--color-danger);
+  margin-bottom: var(--spacing-md);
+}
