@@ -9,6 +9,7 @@ app = FastAPI(title="PWA Belvo Backend")
 origins = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "https://fabulous-inspiration-production-b1f5.up.railway.app"
 ]
 
 app.add_middleware(
