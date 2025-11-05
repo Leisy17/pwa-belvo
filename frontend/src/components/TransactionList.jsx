@@ -8,22 +8,39 @@ export const TransactionList = ({ transactions }) => {
 
   return (
     <ul className="transaction-list">
-      {transactions.map((transaction) => (
-        <li className="transaction-item" key={transaction.id}>
-          <div className="transaction-meta">
-            <span className="transaction-description">{transaction.description}</span>
-            <span className="transaction-date">{transaction.date}</span>
-          </div>
-          <span
-            className={`transaction-amount ${
-              transaction.type === 'income' ? 'transaction-income' : 'transaction-expense'
-            }`}
-          >
-            {transaction.type === 'income' ? '+' : '-'}
-            {transaction.amount} {transaction.currency}
-          </span>
-        </li>
-      ))}
+      {transactions.map((transaction) => {
+        const normalizedType = (transaction.type || '').toString().toUpperCase();
+        const isIncome = normalizedType === 'CREDIT' || normalizedType === 'INCOME';
+        const isExpense = normalizedType === 'DEBIT' || normalizedType === 'EXPENSE';
+        const formattedDate = new Date(transaction.date).toLocaleDateString('es-MX', {
+          day: '2-digit',
+          month: 'short',
+          year: 'numeric',
+        });
+
+        const numericAmount = Number(transaction.amount ?? 0);
+        const formattedAmount = new Intl.NumberFormat('es-MX', {
+          style: 'currency',
+          currency: (transaction.currency || 'MXN').toUpperCase(),
+        }).format(Math.abs(numericAmount));
+
+        return (
+          <li className="transaction-item" key={transaction.id}>
+            <div className="transaction-meta">
+              <span className="transaction-description">{transaction.description || 'Sin descripción'}</span>
+              <span className="transaction-date">{formattedDate}</span>
+            </div>
+            <span
+              className={`transaction-amount ${
+                isIncome ? 'transaction-income' : isExpense ? 'transaction-expense' : ''
+              }`}
+            >
+              {isIncome ? '+' : isExpense ? '-' : ''}
+              {formattedAmount}
+            </span>
+          </li>
+        );
+      })}
     </ul>
   );
 };

@@ -1,0 +1,18 @@
+.link-meta {
+  margin-top: var(--spacing-sm);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  font-size: 0.9rem;
+}
+
+.link-meta__item strong {
+  margin-right: var(--spacing-xs);
+}
+
+.account-actions {
+  margin-top: var(--spacing-md);
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}

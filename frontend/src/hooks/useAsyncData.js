@@ -13,7 +13,7 @@ export const useAsyncData = (asyncFn, dependencies = [], { fallback = null } = {
       setData(result);
     } catch (asyncError) {
       console.error('Async data fetch failed', asyncError);
-      setError(asyncError.message);
+      setError(asyncError);
       setData(fallback);
     } finally {
       setLoading(false);

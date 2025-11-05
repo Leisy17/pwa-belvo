@@ -1,0 +1,43 @@
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: var(--spacing-md);
+}
+
+.account-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px;
+}
+
+.account-table th,
+.account-table td {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+}
+
+.account-table th {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.account-table__action {
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+}
+
+.account-table__action:hover {
+  filter: brightness(0.95);
+}
+
+.account-table__empty {
+  color: var(--color-muted);
+  font-style: italic;
+  margin-top: var(--spacing-md);
+}

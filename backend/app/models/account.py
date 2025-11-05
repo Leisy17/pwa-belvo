@@ -12,6 +12,7 @@ class Account(Base):
 
     id = Column(String, primary_key=True)
     institution_id = Column(String, ForeignKey("institutions.id"), nullable=False, index=True)
+    link_id = Column(String, ForeignKey("belvo_links.id", ondelete="CASCADE"), nullable=True, index=True)
     name = Column(String, nullable=False)
     type = Column(String, nullable=True)
     number = Column(String, nullable=True)
@@ -20,6 +21,7 @@ class Account(Base):
     available_balance = Column(Numeric(14, 2), default=0, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
 
+    link = relationship("BelvoLink", back_populates="accounts")
     transactions = relationship("Transaction", back_populates="account", cascade="all, delete-orphan")
 
 

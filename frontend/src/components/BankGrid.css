@@ -15,6 +15,10 @@
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
+.bank-card--linked {
+  border: 1px solid rgba(16, 185, 129, 0.5);
+}
+
 .bank-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
@@ -34,6 +38,22 @@
   text-transform: uppercase;
   color: var(--color-primary);
   letter-spacing: 0.06em;
+}
+
+.bank-badge {
+  margin-top: auto;
+  align-self: flex-start;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  background: rgba(16, 185, 129, 0.15);
+  color: #047857;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.bank-user {
+  font-size: 0.8rem;
+  color: var(--color-muted);
 }
 
 .bank-empty {

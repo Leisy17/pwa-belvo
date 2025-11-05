@@ -1,0 +1,25 @@
+.account-form {
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-lg);
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  background: #f8fbff;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.account-form__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.account-form__actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.account-form__error {
+  color: #dc2626;
+}

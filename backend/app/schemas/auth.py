@@ -4,7 +4,7 @@ from pydantic import BaseModel, EmailStr, validator
 
 PASSWORD_MIN_LENGTH = 8
 PASSWORD_MAX_LENGTH = 64
-PASSWORD_MAX_BYTES = 500
+PASSWORD_MAX_BYTES = 72
 PASSWORD_TOO_LONG_MESSAGE = (
     "La contraseña es demasiado larga. Usa máximo 64 caracteres y evita emojis o caracteres poco comunes."
 )
@@ -48,17 +48,20 @@ class UserRead(UserBase):
     
 
 
-class Token(BaseModel):
+class AuthResponse(BaseModel):
+    user: UserRead
     access_token: str
+    refresh_token: str
     token_type: str = "bearer"
+    expires_in: int
+    refresh_expires_in: int
 
     class Config:
         from_attributes = True
 
 
-class AuthResponse(BaseModel):
-    user: UserRead
-    token: str
+class TokenRefreshRequest(BaseModel):
+    refresh_token: str
 
     class Config:
         from_attributes = True

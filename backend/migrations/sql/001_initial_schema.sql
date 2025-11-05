@@ -10,10 +10,13 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS institutions (
     id TEXT PRIMARY KEY,
     name TEXT NOT NULL,
+    internal_name TEXT,
+    code TEXT,
     country TEXT,
     type TEXT,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+
 
 CREATE TABLE IF NOT EXISTS accounts (
     id TEXT PRIMARY KEY,

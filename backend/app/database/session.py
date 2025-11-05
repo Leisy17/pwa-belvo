@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import declarative_base, scoped_session, sessionmaker
 from sqlalchemy.engine import make_url
+from sqlalchemy.orm import declarative_base, sessionmaker
 
 from app.core.config import get_settings
 
@@ -12,6 +12,6 @@ if database_url.drivername in {"postgresql+psycopg2", "postgresql"}:
     database_url = database_url.set(drivername="postgresql+psycopg")
 
 engine = create_engine(database_url, pool_pre_ping=True, future=True)
-SessionLocal = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine, future=True))
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine, future=True)
 
 Base = declarative_base()

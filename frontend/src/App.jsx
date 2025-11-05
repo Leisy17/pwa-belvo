@@ -7,6 +7,7 @@ import { RegisterView } from '@views/RegisterView.jsx';
 import { LoginView } from '@views/LoginView.jsx';
 import { BankListView } from '@views/BankListView.jsx';
 import { BankDetailView } from '@views/BankDetailView.jsx';
+import { LinkAccountsView } from '@views/LinkAccountsView.jsx';
 import { AccountDetailView } from '@views/AccountDetailView.jsx';
 
 const LandingRedirect = () => {
@@ -23,6 +24,7 @@ const AppRoutes = () => (
       <Route element={<ProtectedRoute />}>
         <Route path="banks" element={<BankListView />} />
         <Route path="banks/:institutionId" element={<BankDetailView />} />
+        <Route path="banks/:institutionId/links/:linkId" element={<LinkAccountsView />} />
         <Route
           path="banks/:institutionId/accounts/:accountId"
           element={<AccountDetailView />}

@@ -2,14 +2,24 @@ export const mockInstitutions = [
   {
     id: 'belvo-bank-1',
     name: 'Belvo Bank One',
+    internal_name: 'belvo-bank-1',
     country: 'MX',
-    type: 'bank'
+    type: 'bank',
+    link_id: null,
+    is_linked: false,
+    link_username: null,
+    linked_email: null
   },
   {
     id: 'belvo-bank-2',
     name: 'Belvo Bank Two',
+    internal_name: 'belvo-bank-2',
     country: 'MX',
-    type: 'bank'
+    type: 'bank',
+    link_id: null,
+    is_linked: false,
+    link_username: null,
+    linked_email: null
   }
 ];
 
