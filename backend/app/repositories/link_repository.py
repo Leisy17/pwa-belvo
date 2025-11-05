@@ -55,36 +55,26 @@ class LinkRepository:
         self.db.refresh(link)
         return link
 
-    def get_by_user_and_institution(self, user_id: str, institution_id: str) -> Optional[BelvoLink]:
-        return (
-            self.db.query(BelvoLink)
-            .filter(BelvoLink.user_id == user_id, BelvoLink.institution_id == institution_id)
-            .order_by(BelvoLink.created_at.desc())
-            .first()
-        )
+    def list_active_by_user(self, _user_id: str) -> Iterable[BelvoLink]:
+        return self.db.query(BelvoLink).order_by(BelvoLink.created_at.desc()).all()
 
-    def list_active_by_user(self, user_id: str) -> Iterable[BelvoLink]:
-        return (
-            self.db.query(BelvoLink)
-            .filter(BelvoLink.user_id == user_id)
-            .order_by(BelvoLink.created_at.desc())
-            .all()
-        )
-
-    def list_by_institution_for_user(self, user_id: str, institution_id: str) -> Iterable[BelvoLink]:
+    def list_by_institution_for_user(self, _user_id: str, institution_id: str) -> Iterable[BelvoLink]:
         return (
             self.db.query(BelvoLink)
             .filter(
-                BelvoLink.user_id == user_id,
                 BelvoLink.institution_id == institution_id,
             )
             .order_by(BelvoLink.created_at.desc())
             .all()
         )
 
-    def get_by_id_for_user(self, link_id: str, user_id: str) -> Optional[BelvoLink]:
+    def get_by_id_for_user(self, link_id: str, _user_id: str) -> Optional[BelvoLink]:
+        return self.db.query(BelvoLink).filter(BelvoLink.id == link_id).first()
+
+    def get_by_user_and_institution(self, _user_id: str, institution_id: str) -> Optional[BelvoLink]:
         return (
             self.db.query(BelvoLink)
-            .filter(BelvoLink.id == link_id, BelvoLink.user_id == user_id)
+            .filter(BelvoLink.institution_id == institution_id)
+            .order_by(BelvoLink.created_at.desc())
             .first()
         )

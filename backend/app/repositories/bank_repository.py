@@ -5,7 +5,6 @@ from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from app.models.account import Account, Transaction
-from app.models.belvo_link import BelvoLink
 from app.models.institution import Institution
 
 
@@ -49,31 +48,23 @@ class BankRepository:
     def refresh(self, account: Account) -> None:
         self.db.refresh(account)
 
-    def get_account_for_user(self, account_id: str, user_id: str) -> Optional[Account]:
-        return (
-            self.db.query(Account)
-            .join(BelvoLink, Account.link_id == BelvoLink.id)
-            .filter(Account.id == account_id, BelvoLink.user_id == user_id)
-            .first()
-        )
+    def get_account_for_user(self, account_id: str, _user_id: str) -> Optional[Account]:
+        return self.db.query(Account).filter(Account.id == account_id).first()
 
-    def list_accounts_by_institution_for_user(self, institution_id: str, user_id: str) -> List[Account]:
+    def list_accounts_by_institution_for_user(self, institution_id: str, _user_id: str) -> List[Account]:
         return (
             self.db.query(Account)
-            .join(BelvoLink, Account.link_id == BelvoLink.id)
             .filter(
                 Account.institution_id == institution_id,
-                BelvoLink.user_id == user_id,
             )
             .order_by(Account.name)
             .all()
         )
 
-    def list_accounts_by_link_for_user(self, link_id: str, user_id: str) -> List[Account]:
+    def list_accounts_by_link_for_user(self, link_id: str, _user_id: str) -> List[Account]:
         return (
             self.db.query(Account)
-            .join(BelvoLink, Account.link_id == BelvoLink.id)
-            .filter(Account.link_id == link_id, BelvoLink.user_id == user_id)
+            .filter(Account.link_id == link_id)
             .order_by(Account.name)
             .all()
         )
@@ -95,46 +86,33 @@ class BankRepository:
         self.db.add(transaction)
         return transaction
 
-    def list_transactions_for_user(self, account_id: str, user_id: str) -> List[Transaction]:
+    def list_transactions_for_user(self, account_id: str, _user_id: str) -> List[Transaction]:
         return (
             self.db.query(Transaction)
-            .join(Account, Transaction.account_id == Account.id)
-            .join(BelvoLink, Account.link_id == BelvoLink.id)
-            .filter(Transaction.account_id == account_id, BelvoLink.user_id == user_id)
+            .filter(Transaction.account_id == account_id)
             .order_by(Transaction.date.desc())
             .all()
         )
 
-    def aggregate_account_summary(self, account_id: str, user_id: str) -> Optional[dict]:
+    def aggregate_account_summary(self, account_id: str, _user_id: str) -> Optional[dict]:
         type_column = func.lower(Transaction.type)
         income = (
             self.db.query(func.coalesce(func.sum(Transaction.amount), 0))
-            .join(Account, Transaction.account_id == Account.id)
-            .join(BelvoLink, Account.link_id == BelvoLink.id)
             .filter(
                 Transaction.account_id == account_id,
                 type_column.in_(("credit", "income")),
-                BelvoLink.user_id == user_id,
             )
             .scalar()
         )
         expenses = (
             self.db.query(func.coalesce(func.sum(Transaction.amount), 0))
-            .join(Account, Transaction.account_id == Account.id)
-            .join(BelvoLink, Account.link_id == BelvoLink.id)
             .filter(
                 Transaction.account_id == account_id,
                 type_column.in_(("debit", "expense")),
-                BelvoLink.user_id == user_id,
             )
             .scalar()
         )
-        account = (
-            self.db.query(Account)
-            .join(BelvoLink, Account.link_id == BelvoLink.id)
-            .filter(Account.id == account_id, BelvoLink.user_id == user_id)
-            .first()
-        )
+        account = self.db.query(Account).filter(Account.id == account_id).first()
         if account is None:
             return None
         income_total = Decimal(income or 0)
