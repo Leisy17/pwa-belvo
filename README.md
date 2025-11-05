@@ -59,6 +59,12 @@ Backend:
 - `pytest` (si se añaden pruebas)
 - Scripts SQL en `backend/migrations/sql/` para inicializar la base
 
+## Acceso en línea
+
+La aplicación también se puede acceder desde Railway en:  
+[https://fabulous-inspiration-production-b1f5.up.railway.app](https://fabulous-inspiration-production-b1f5.up.railway.app)
+
+
 ## Próximos pasos sugeridos
 
 - Añadir pruebas automatizadas (PyTest en backend, React Testing Library en frontend).
